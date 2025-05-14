@@ -1,0 +1,2 @@
+[console_scripts]
+sbb_standalone_textline = sbb_standalone_textline.cli:main

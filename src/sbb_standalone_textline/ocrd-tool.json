@@ -1,0 +1,24 @@
+{
+  "version": "0.0.11",
+  "git_url": "https://github.com/qurator-spk/eynollah",
+  "tools": {
+    "ocrd-sta_textline-segment": {
+      "executable": "ocrd-sta_textline-segment",
+      "categories": ["Layout analysis"],
+      "description": "Segment page into regions and lines and do reading order detection with eynollah",
+      "input_file_grp": ["OCR-D-IMG", "OCR-D-SEG-PAGE", "OCR-D-GT-SEG-PAGE"],
+      "output_file_grp": ["OCR-D-SEG-LINE"],
+      "steps": ["layout/segmentation/region", "layout/segmentation/line"],
+      "parameters": {
+        "models": {
+          "type": "string",
+          "format": "file",
+          "content-type": "text/directory",
+          "cacheable": true,
+          "description": "Path to directory containing models to be used (See https://qurator-data.de/eynollah)",
+          "required": true
+        }
+      }
+    }
+  }
+}
