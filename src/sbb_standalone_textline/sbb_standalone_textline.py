@@ -3020,7 +3020,7 @@ class Sbb_standalone_textline:
         polygons_of_images = return_contours_of_interested_region(img_revised_tab, 5)
         self.logger.debug('exit run_boxes_full_layout')
         return polygons_of_images, img_revised_tab, text_regions_p_1_n, textline_mask_tot_d, regions_without_separators_d, regions_fully, regions_without_separators, polygons_of_marginals, contours_tables
-    def write_into_page_xml_hand(self,contours,all_found_texline_polygons,image_dir,height_org,width_org,f_name):
+    def write_into_page_xml_hand(self,contours,all_found_texline_polygons,image_dir,height_org,width_org,f_name,image_filename):
         ##found_polygons_text_region_h=contours_h
         found_polygons_text_region=contours
 
@@ -3049,12 +3049,12 @@ class Sbb_standalone_textline:
 
         page=ET.SubElement(data,'Page')
 
-        page.set('imageFilename', image_dir)
-        page.set('imageHeight',str(height_org) ) 
-        page.set('imageWidth',str(width_org) )
+        page.set('imageFilename', os.path.basename(image_filename))
+        page.set('imageHeight',str(height_org))
+        page.set('imageWidth',str(width_org))
         page.set('type',"content")
         page.set('readingDirection',"left-to-right")
-        page.set('textLineOrder',"top-to-bottom" )
+        page.set('textLineOrder',"top-to-bottom")
 
 
 
@@ -3592,7 +3592,7 @@ class Sbb_standalone_textline:
         
         cnt_page  = return_contours_of_image(img_page_prediction)
         print(self.image_filename_stem)
-        self.write_into_page_xml_hand(cnt_page[0],all_contoures,self.dir_out,height_org,width_org,self.image_filename_stem)
+        self.write_into_page_xml_hand(cnt_page[0],all_contoures,self.dir_out,height_org,width_org,self.image_filename_stem,self.image_filename)
 
         pcgts = None
         self.logger.info("Job done in %.1fs", time.time() - t0)
